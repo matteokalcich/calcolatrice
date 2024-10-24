@@ -15,6 +15,11 @@ if (isset($_POST['operatore'])) {
     $_SESSION['textArea'] = '';
 }
 
+if(isset($_POST['hex'])){
+
+    $_SESSION['textArea'] .= $_POST['hex'];
+}
+
 if (isset($_POST['uguale'])) {
     $secondoNumero = $_SESSION['textArea'];
     if ($_SESSION['operatore'] == '+') {
@@ -85,16 +90,60 @@ if (isset($_POST['cancella'])) {
                             </div>
 
                             <div class="row mt-2">
-                                <div class="col-4">
+                                <div class="col-12">
                                     <button type="submit" class="btn w-100 border" name="numero" value="0">0</button>
                                 </div>
+
+                            </div>
+
+
+
+                            <div class="row mt-2">
+
                                 <div class="col-4">
-                                    <button type="submit" class="btn btn-danger w-100" name="cancella" value="C">C</button>
+
+                                    <button type="submit" class="btn w-100 border" name="hex" value="A">A</button>
+
                                 </div>
                                 <div class="col-4">
+
+                                    <button type="submit" class="btn w-100 border" name="hex" value="B">B</button>
+                                </div>
+                                <div class="col-4">
+
+                                    <button type="submit" class="btn w-100 border" name="hex" value="C">C</button>
+
+                                </div>
+                            </div>
+
+                            <div class="row mt-2">
+
+                                <div class="col-4">
+
+                                    <button type="submit" class="btn w-100 border" name="hex" value="D">D</button>
+
+                                </div>
+                                <div class="col-4">
+
+                                    <button type="submit" class="btn w-100 border" name="hex" value="E">E</button>
+                                </div>
+                                <div class="col-4">
+
+                                    <button type="submit" class="btn w-100 border" name="hex" value="F">F</button>
+
+                                </div>
+                            </div>
+
+                            <div class="row mt-2">
+
+                                <div class="col-6">
+                                    <button type="submit" class="btn btn-danger w-100" name="cancella" value="AC">AC</button>
+                                </div>
+                                <div class="col-6">
                                     <button type="submit" class="btn btn-success w-100" name="uguale" value="=">=</button>
                                 </div>
                             </div>
+
                         </div>
 
                         <div class="col-4">
