@@ -1,77 +1,44 @@
 <?php
 session_start();
 
-
 if (!isset($_SESSION['textArea'])) {
     $_SESSION['textArea'] = '';
-    $_SESSION['mode'] = 'decimal'; // Modalità di default: decimale
 }
 
-// Aggiorna il contenuto di textArea con i numeri premuti
 if (isset($_POST['numero'])) {
     $_SESSION['textArea'] .= $_POST['numero'];
-    $_SESSION['mode'] = 'decimal'; // Se viene premuto un numero, si passa alla modalità decimale
 }
 
-// Aggiorna il contenuto di textArea con i valori esadecimali (A-F)
-if (isset($_POST['hex'])) {
-    $_SESSION['textArea'] .= $_POST['hex'];
-    $_SESSION['mode'] = 'hex'; // Se viene premuto A-F, passa alla modalità esadecimale
-}
-
-// Funzione per verificare se il valore è esadecimale
-function checkHex($hex)
-{
-    return ctype_xdigit($hex);
-}
-
-// Gestisce l'operatore (+, -, *, /)
 if (isset($_POST['operatore'])) {
     $_SESSION['primoNumero'] = $_SESSION['textArea'];
     $_SESSION['operatore'] = $_POST['operatore'];
     $_SESSION['textArea'] = '';
 }
 
-// Calcolo del risultato quando viene premuto "="
+if(isset($_POST['hex'])){
+
+    $_SESSION['textArea'] .= $_POST['hex'];
+}
+
 if (isset($_POST['uguale'])) {
     $secondoNumero = $_SESSION['textArea'];
-
-    if ($_SESSION['mode'] == 'hex' && checkHex($_SESSION['primoNumero']) && checkHex($secondoNumero)) {
-        // Se siamo in modalità esadecimale, converti in decimale per il calcolo
-        $primoNumeroDecimale = hexdec($_SESSION['primoNumero']);
-        $secondoNumeroDecimale = hexdec($secondoNumero);
-    } else {
-        // Se siamo in modalità decimale, usa direttamente i numeri
-        $primoNumeroDecimale = (int)$_SESSION['primoNumero'];
-        $secondoNumeroDecimale = (int)$secondoNumero;
-    }
-
-    // Esegui l'operazione in base all'operatore selezionato
     if ($_SESSION['operatore'] == '+') {
-        $risultato = $primoNumeroDecimale + $secondoNumeroDecimale;
+        $_SESSION['textArea'] = $_SESSION['primoNumero'] + $secondoNumero;
     } elseif ($_SESSION['operatore'] == '-') {
-        $risultato = $primoNumeroDecimale - $secondoNumeroDecimale;
+        $_SESSION['textArea'] = $_SESSION['primoNumero'] - $secondoNumero;
     } elseif ($_SESSION['operatore'] == '/') {
-        if ($secondoNumeroDecimale == 0) {
+        if ($secondoNumero == 0) {
             $_SESSION['textArea'] = 'Impossibile dividere per 0';
         } else {
-            $risultato = $primoNumeroDecimale / $secondoNumeroDecimale;
+            $_SESSION['textArea'] = $_SESSION['primoNumero'] / $secondoNumero;
         }
     } elseif ($_SESSION['operatore'] == '*') {
-        $risultato = $primoNumeroDecimale * $secondoNumeroDecimale;
-    }
-
-    // Riconversione in esadecimale se la modalità è 'hex', altrimenti resta decimale
-    if ($_SESSION['mode'] == 'hex') {
-        $_SESSION['textArea'] = strtoupper(dechex($risultato));
-    } else {
-        $_SESSION['textArea'] = (string)$risultato;
+        $_SESSION['textArea'] = $_SESSION['primoNumero'] * $secondoNumero;
     }
 }
-// Resetta la calcolatrice
+
 if (isset($_POST['cancella'])) {
     $_SESSION['textArea'] = '';
-    $_SESSION['mode'] = 'decimal'; // Resetta alla modalità decimale
 }
 ?>
 
