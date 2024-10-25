@@ -39,19 +39,55 @@ if(isset($_POST['hex'])){
 
 if (isset($_POST['uguale'])) {
     $secondoNumero = $_SESSION['textArea'];
-    if ($_SESSION['operatore'] == '+') {
-        $_SESSION['textArea'] = $_SESSION['primoNumero'] + $secondoNumero;
-    } elseif ($_SESSION['operatore'] == '-') {
-        $_SESSION['textArea'] = $_SESSION['primoNumero'] - $secondoNumero;
-    } elseif ($_SESSION['operatore'] == '/') {
-        if ($secondoNumero == 0) {
-            $_SESSION['textArea'] = 'Impossibile dividere per 0';
-        } else {
-            $_SESSION['textArea'] = $_SESSION['primoNumero'] / $secondoNumero;
+
+    if($_SESSION['mode'] == 'HEX'){ 
+
+        //echo 'DEC'; //current mode
+
+
+        if ($_SESSION['operatore'] == '+') {
+
+            $_SESSION['textArea'] = $_SESSION['primoNumero'] + $secondoNumero;
+
+        } elseif ($_SESSION['operatore'] == '-') {
+
+            $_SESSION['textArea'] = $_SESSION['primoNumero'] - $secondoNumero;
+
+        } elseif ($_SESSION['operatore'] == '/') {
+
+            if ($secondoNumero == 0) {
+
+                $_SESSION['textArea'] = 'Impossibile dividere per 0';
+
+            } else {
+
+                $_SESSION['textArea'] = $_SESSION['primoNumero'] / $secondoNumero;
+
+            }
+
+        } elseif ($_SESSION['operatore'] == '*') {
+
+            $_SESSION['textArea'] = $_SESSION['primoNumero'] * $secondoNumero;
         }
-    } elseif ($_SESSION['operatore'] == '*') {
-        $_SESSION['textArea'] = $_SESSION['primoNumero'] * $secondoNumero;
+
+    } else{
+
+        //echo 'HEX'; //mode
+
+        $hexPrimo = hexdec($_SESSION['primoNumero']);
+
+        $hexSecondo = hexdec($secondoNumero);
+
+        if ($_SESSION['operatore'] == '+') {
+
+            $risultato = $hexPrimo + $hexSecondo;
+
+        }  
+        
+        $_SESSION['textArea'] = dechex($risultato);
+
     }
+    
 }
 
 if (isset($_POST['cancella'])) {
