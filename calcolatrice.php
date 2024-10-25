@@ -226,18 +226,42 @@ if (isset($_POST['cancella'])) {
 
                         <div class="col-4">
                             <div class="row">
-                                <div class="col-12 text-end">
-                                    <button type="submit" class="btn w-100 border" name="operatore" value="+">+</button>
-                                </div>
-                                <div class="col-12 text-end">
-                                    <button type="submit" class="btn w-100 border" name="operatore" value="-" <?php if($_SESSION['mode'] == 'DEC') {echo 'disabled';}?>>-</button>
-                                </div>
-                                <div class="col-12 text-end">
-                                    <button type="submit" class="btn w-100 border" name="operatore" value="/" <?php if($_SESSION['mode'] == 'DEC') {echo 'disabled';}?>>/</button>
-                                </div>
-                                <div class="col-12 text-end">
-                                    <button type="submit" class="btn w-100 border" name="operatore" value="*" <?php if($_SESSION['mode'] == 'DEC') {echo 'disabled';}?>>x</button>
-                                </div>
+                                <?php 
+
+                                if($_SESSION['mode'] == 'DEC'){
+
+                                    //HEX mode
+
+                                    echo '<div class="col-12 text-end">
+                                            <button type="submit" class="btn w-100 border" name="operatore" value="+">+</button>
+                                        </div>';
+
+
+                                } else{
+
+                                    echo '
+                                
+                                        <div class="col-12 text-end">
+                                            <button type="submit" class="btn w-100 border" name="operatore" value="+">+</button>
+                                        </div>
+                                        <div class="col-12 text-end">
+                                            <button type="submit" class="btn w-100 border" name="operatore" value="-">-</button>
+                                        </div>
+                                        <div class="col-12 text-end">
+                                            <button type="submit" class="btn w-100 border" name="operatore" value="/">/</button>
+                                        </div>
+                                        <div class="col-12 text-end">
+                                            <button type="submit" class="btn w-100 border" name="operatore" value="*">x</button>
+                                        </div>
+
+                                    ';
+
+
+                                }
+                                
+                                
+                                
+                                ?>
                                 <div class="col-12 text-end">
                                     <button type="submit" class="btn w-100 border" name="mode" value="<?php echo $_SESSION['mode']; ?>"><?php echo $_SESSION['mode']; ?></button>
                                 </div>
