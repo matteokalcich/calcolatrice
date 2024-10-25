@@ -5,6 +5,23 @@ if (!isset($_SESSION['textArea'])) {
     $_SESSION['textArea'] = '';
 }
 
+if(!isset($_SESSION['mode'])){
+
+    $_SESSION['mode'] = 'DEC';
+}
+
+if(isset($_POST['mode'])){
+
+    if($_POST['mode'] == 'HEX'){
+
+        $_SESSION['mode'] = 'DEC';
+
+    } else{
+
+        $_SESSION['mode'] = 'HEX';
+    }
+}
+
 if (isset($_POST['numero'])) {
     $_SESSION['textArea'] .= $_POST['numero'];
 }
@@ -60,7 +77,18 @@ if (isset($_POST['cancella'])) {
                 <form action="" method="POST">
                     <div class="row">
                         <div class="col-6 w-100 text-center">
-                            <p>DATI</p>
+                            <p>Current mode: <?php 
+                            
+                            if($_SESSION['mode'] == 'HEX'){
+
+                                echo 'DEC';
+                            } else{
+
+                                echo 'HEX';
+                            }
+                             
+                            
+                            ?></p>
                         </div>
                         <div class="col-6 w-100">
 
@@ -159,6 +187,9 @@ if (isset($_POST['cancella'])) {
                                 </div>
                                 <div class="col-12 text-end">
                                     <button type="submit" class="btn w-100 border" name="operatore" value="*">x</button>
+                                </div>
+                                <div class="col-12 text-end">
+                                    <button type="submit" class="btn w-100 border" name="mode" value="<?php echo $_SESSION['mode']; ?>"><?php echo $_SESSION['mode']; ?></button>
                                 </div>
                             </div>
                         </div>
