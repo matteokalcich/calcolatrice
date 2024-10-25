@@ -7,18 +7,17 @@ if (!isset($_SESSION['textArea'])) {
     $_SESSION['textArea'] = '';
 }
 
-if(!isset($_SESSION['mode'])){
+if (!isset($_SESSION['mode'])) {
 
     $_SESSION['mode'] = 'DEC';
 }
 
-if(isset($_POST['mode'])){
+if (isset($_POST['mode'])) {
 
-    if($_POST['mode'] == 'HEX'){
+    if ($_POST['mode'] == 'HEX') {
 
         $_SESSION['mode'] = 'DEC';
-
-    } else{
+    } else {
 
         $_SESSION['mode'] = 'HEX';
     }
@@ -35,7 +34,7 @@ if (isset($_POST['operatore'])) {
     $_SESSION['textArea'] = '';
 }
 
-if(isset($_POST['hex'])){
+if (isset($_POST['hex'])) {
 
     $_SESSION['textArea'] .= $_POST['hex'];
 }
@@ -43,7 +42,7 @@ if(isset($_POST['hex'])){
 if (isset($_POST['uguale'])) {
     $secondoNumero = $_SESSION['textArea'];
 
-    if($_SESSION['mode'] == 'HEX'){ 
+    if ($_SESSION['mode'] == 'HEX') {
 
         //echo 'DEC'; //current mode
 
@@ -51,29 +50,23 @@ if (isset($_POST['uguale'])) {
         if ($_SESSION['operatore'] == '+') {
 
             $_SESSION['textArea'] = $_SESSION['primoNumero'] + $secondoNumero;
-
         } elseif ($_SESSION['operatore'] == '-') {
 
             $_SESSION['textArea'] = $_SESSION['primoNumero'] - $secondoNumero;
-
         } elseif ($_SESSION['operatore'] == '/') {
 
             if ($secondoNumero == 0) {
 
                 $_SESSION['textArea'] = 'Impossibile dividere per 0';
-
             } else {
 
                 $_SESSION['textArea'] = $_SESSION['primoNumero'] / $secondoNumero;
-
             }
-
         } elseif ($_SESSION['operatore'] == '*') {
 
             $_SESSION['textArea'] = $_SESSION['primoNumero'] * $secondoNumero;
         }
-
-    } else{
+    } else {
 
         //echo 'HEX'; //mode
 
@@ -86,12 +79,8 @@ if (isset($_POST['uguale'])) {
             $risultato = $hexPrimo + $hexSecondo;
 
             $_SESSION['textArea'] = dechex($risultato);
-
         }
     }
-
-    
-    
 }
 
 if (isset($_POST['cancella'])) {
@@ -113,22 +102,24 @@ if (isset($_POST['cancella'])) {
 
     <div class="container w-25">
         <div class="d-flex justify-content-center">
-            <div class="w-100">
+            <div class="w-100 border rounded-3 p-2">
                 <form action="" method="POST">
                     <div class="row">
                         <div class="col-6 w-100 text-center">
-                            <p>Current mode: <?php 
-                            
-                            if($_SESSION['mode'] == 'HEX'){
+                            <p>Current mode:
 
-                                echo 'DEC';
-                            } else{
+                                <?php
 
-                                echo 'HEX';
-                            }
-                             
-                            
-                            ?></p>
+                                if ($_SESSION['mode'] == 'HEX') {
+
+                                    echo 'DEC';
+                                } else {
+
+                                    echo 'HEX';
+                                }
+
+
+                                ?></p>
                         </div>
                         <div class="col-6 w-100">
 
@@ -207,37 +198,53 @@ if (isset($_POST['cancella'])) {
                                     </div>
                                 </div>
                                 ';
+                            } else {
 
+                                //DEC mode
+
+                                echo '
+                                <div class="row mt-2">
+
+                                    <div class="col-6">
+                                        <button type="submit" class="btn btn-danger w-100" name="cancella" value="AC">AC</button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button type="submit" class="btn btn-success w-100" name="uguale" value="=">=</button>
+                                    </div>
+                                </div>';
                             }
-                            
+
                             ?>
 
-                            <div class="row mt-2">
 
-                                <div class="col-6">
-                                    <button type="submit" class="btn btn-danger w-100" name="cancella" value="AC">AC</button>
-                                </div>
-                                <div class="col-6">
-                                    <button type="submit" class="btn btn-success w-100" name="uguale" value="=">=</button>
-                                </div>
-                            </div>
 
                         </div>
 
                         <div class="col-4">
                             <div class="row">
-                                <?php 
 
-                                if($_SESSION['mode'] == 'DEC'){
+                                <div class="col-12 text-end">
+                                    <button type="submit" class="btn w-100 border" name="mode" value="<?php echo $_SESSION['mode']; ?>"><?php echo $_SESSION['mode']; ?></button>
+                                </div>
+
+                                <?php
+
+                                if ($_SESSION['mode'] == 'DEC') {
 
                                     //HEX mode
 
                                     echo '<div class="col-12 text-end">
                                             <button type="submit" class="btn w-100 border" name="operatore" value="+">+</button>
+                                        </div>
+                                        
+
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-danger w-100" name="cancella" value="AC">AC</button>
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-success w-100" name="uguale" value="=">=</button>
                                         </div>';
-
-
-                                } else{
+                                } else {
 
                                     echo '
                                 
@@ -255,16 +262,12 @@ if (isset($_POST['cancella'])) {
                                         </div>
 
                                     ';
-
-
                                 }
-                                
-                                
-                                
+
+
+
                                 ?>
-                                <div class="col-12 text-end">
-                                    <button type="submit" class="btn w-100 border" name="mode" value="<?php echo $_SESSION['mode']; ?>"><?php echo $_SESSION['mode']; ?></button>
-                                </div>
+
                             </div>
                         </div>
                     </div>
