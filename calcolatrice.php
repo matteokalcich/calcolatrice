@@ -96,44 +96,6 @@ if (isset($_POST['cancella'])) {
 
                             </div>
 
-
-
-                            <div class="row mt-2">
-
-                                <div class="col-4">
-
-                                    <button type="submit" class="btn w-100 border" name="hex" value="A">A</button>
-
-                                </div>
-                                <div class="col-4">
-
-                                    <button type="submit" class="btn w-100 border" name="hex" value="B">B</button>
-                                </div>
-                                <div class="col-4">
-
-                                    <button type="submit" class="btn w-100 border" name="hex" value="C">C</button>
-
-                                </div>
-                            </div>
-
-                            <div class="row mt-2">
-
-                                <div class="col-4">
-
-                                    <button type="submit" class="btn w-100 border" name="hex" value="D">D</button>
-
-                                </div>
-                                <div class="col-4">
-
-                                    <button type="submit" class="btn w-100 border" name="hex" value="E">E</button>
-                                </div>
-                                <div class="col-4">
-
-                                    <button type="submit" class="btn w-100 border" name="hex" value="F">F</button>
-
-                                </div>
-                            </div>
-
                             <div class="row mt-2">
 
                                 <div class="col-6">
