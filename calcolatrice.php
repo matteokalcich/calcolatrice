@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+
 if (!isset($_SESSION['textArea'])) {
     $_SESSION['textArea'] = '';
 }
@@ -15,10 +16,6 @@ if (isset($_POST['operatore'])) {
     $_SESSION['textArea'] = '';
 }
 
-if(isset($_POST['hex'])){
-
-    $_SESSION['textArea'] .= $_POST['hex'];
-}
 
 if (isset($_POST['uguale'])) {
     $secondoNumero = $_SESSION['textArea'];
